@@ -14,10 +14,7 @@ class MaterialChatImpl extends ZeroFrame
     C.initialize()
     @cmd "siteInfo", {}, @siteInfoChanged # Intialize siteInfo
     $('#button-send').on 'click', @onSendMessage
-    #alert "Ready."
-    #new Message "petercxy@zeroid.bit", "Test Message 1"
-    #  .render()
-
+    
   onRequest: (cmd, msg) =>
     switch cmd
       when "setSiteInfo" then @siteInfoChanged msg
@@ -31,6 +28,7 @@ class MaterialChatImpl extends ZeroFrame
       LoginDialog.tryLogin()
     else
       LoginDialog.dismiss()
+      MessageList.loadMessages()
       # TODO: Complete login
 
   onSendMessage: (ev) ->
@@ -42,6 +40,7 @@ class MaterialChatImpl extends ZeroFrame
       await MessageList.sendMessage message
     msgInput.val ''
     msgInput.prop 'disabled', no
+    MessageList.loadMessages()
 
   getUserData: (required = no) =>
     dataPath = C.PATH_USER_INNER_DATA.replace '{{user}}', @site_info.auth_address

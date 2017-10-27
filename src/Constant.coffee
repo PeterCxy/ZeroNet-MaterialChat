@@ -6,6 +6,9 @@ export PATH_USER_INNER_CONTENT = "data/users/{{user}}/content.json"
 
 export ID_PROVIDERS = [] # we will load it later from content.json
 
+export SQL_GET_ALL_MESSAGES =
+  "SELECT * FROM message LEFT JOIN json USING (json_id) ORDER BY date_added DESC"
+
 export initialize = ->
   content = JSON.parse await MaterialChat.cmdp 'fileGet',
     inner_path: PATH_USER_CONTENT
