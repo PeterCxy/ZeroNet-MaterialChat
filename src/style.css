@@ -59,9 +59,10 @@ body {
        transform: rotate(180deg);
 }
 
-.container-input {
-  height: 5em;
-  vertical-align: bottom;
+.container-input input[type="text"] {
+  min-height: 2.5em;
+  line-height: 1em;
+  font-size: 0.9em;
 }
 
 .input-spacing {
