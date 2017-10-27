@@ -123,6 +123,10 @@ body {
   font-size: 1em;
 }
 
+.message h5#username {
+  cursor: pointer;
+}
+
 .message .timestamp {
   font-size: 0.8em;
   color: rgb(100, 100, 100);

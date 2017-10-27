@@ -39,6 +39,9 @@ class Message
     @initial = @username[0...1].toUpperCase()
     @renderAvatar()
 
+    # Bind click-to-reply
+    @elem.find('#username').click @clickToReply
+
     return @elem
 
   renderAvatar: ->
@@ -49,5 +52,12 @@ class Message
         useGravatar: no
         initials: @initial
       AVATAR_CACHE[@initial] = @elemAvatar.attr 'src'
+
+  clickToReply: (ev) =>
+    ev.preventDefault()
+    input = $('#message-input')
+    if input.val().trim() is ''
+      input.val @username + ': '
+      input.focus()
 
 export default Message
