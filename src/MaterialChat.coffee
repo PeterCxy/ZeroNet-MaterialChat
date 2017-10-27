@@ -14,6 +14,7 @@ class MaterialChatImpl extends ZeroFrame
   onOpenWebsocket: () =>
     C.initialize()
     @cmd "siteInfo", {}, @siteInfoChanged # Intialize siteInfo
+    $('container-main').focus()
     $('#button-send').on 'click', @onSendMessage
 
   onRequest: (cmd, msg) =>
