@@ -41,11 +41,9 @@ class MaterialChatImpl extends ZeroFrame
     ev.preventDefault()
     msgInput = $('#message-input')
     message = msgInput.val().trim()
-    msgInput.prop 'disabled', yes
+    msgInput.val ''
     if message isnt ''
       await MessageList.sendMessage message
-    msgInput.val ''
-    msgInput.prop 'disabled', no
     MessageList.loadMessages()
 
   getUserData: (required = no) =>
