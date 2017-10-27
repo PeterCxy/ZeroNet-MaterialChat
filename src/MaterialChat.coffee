@@ -32,6 +32,8 @@ class MaterialChatImpl extends ZeroFrame
       LoginDialog.tryLogin()
     else
       LoginDialog.dismiss()
+      $('#current-user').text "Current: " + @site_info.cert_user_id
+      $('#switch-user').click LoginDialog.selectUser
       MessageList.loadMessages()
       # TODO: Complete login
 
