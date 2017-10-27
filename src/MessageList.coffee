@@ -49,8 +49,8 @@ class MessageListImpl
         @offset = @offset - (@count - oldCount) + 1
         @firstLimit = @firstLimit + (@count - oldCount)
     
-    # TODO: Introduce OFFSET for scrolling up & down
     await @nextPage yes, @firstLimit
+    # TODO： Don't scroll if not at the bottom
     @container.animate { scrollTop: @elem.height() }, 'slow'
   
   onLoadMore: (ev) =>
