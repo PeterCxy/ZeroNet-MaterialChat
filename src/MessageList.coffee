@@ -25,7 +25,7 @@ class MessageListImpl
     @elem.html('') # Clear it
     messages.forEach (it) =>
       @elem.append new Message(it.cert_user_id, it.body, it.date_added).render()
-    @container.animate { scrollTop: @container.height() }, 'slow'
+    @container.animate { scrollTop: @elem.height() }, 'slow'
 
 MessageList = new MessageListImpl
 export default MessageList
