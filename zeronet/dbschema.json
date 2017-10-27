@@ -1,0 +1,35 @@
+{
+  "db_name": "MaterialChat",
+  "db_file": "data/chat.db",
+  "version": 2,
+  "maps": {
+      "users/.+/data.json": {
+          "to_table": [ "message" ]
+      },
+      "users/.+/content.json": {
+          "to_json_table": [ "cert_user_id" ],
+          "file_name": "data.json"
+      }
+  },
+  "tables": {
+      "json": {
+          "cols": [
+              ["json_id", "INTEGER PRIMARY KEY AUTOINCREMENT"],
+              ["directory", "TEXT"],
+              ["file_name", "TEXT"],
+              ["cert_user_id", "TEXT"]
+          ],
+          "indexes": ["CREATE UNIQUE INDEX path ON json(directory, file_name)"],
+          "schema_changed": 10
+      },
+      "message": {
+          "cols": [
+              ["body", "TEXT"],
+              ["date_added", "INTEGER"],
+              ["json_id", "INTEGER REFERENCES json (json_id)"]
+          ],
+          "indexes": ["CREATE UNIQUE INDEX message_key ON message(json_id, date_added)"],
+          "schema_changed": 10
+      }
+  }
+}
