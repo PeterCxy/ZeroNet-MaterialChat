@@ -60,6 +60,12 @@ body {
 .avatar {
   width: 60px;
   height: 60px;
+  margin-left: 4px;
+  box-shadow: 0 0 4px RGBA(100, 100, 100, 0.4);
+}
+
+.avatar.border {
+  border-width: 2px !important;
 }
 
 .message {

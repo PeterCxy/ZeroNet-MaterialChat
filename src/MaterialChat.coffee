@@ -1,3 +1,4 @@
+import "./Util.coffee"
 import ZeroFrame from "./ZeroFrame.coffee"
 import Message from "./Message.coffee"
 import MessageList from "./MessageList.coffee"
@@ -14,7 +15,7 @@ class MaterialChatImpl extends ZeroFrame
     C.initialize()
     @cmd "siteInfo", {}, @siteInfoChanged # Intialize siteInfo
     $('#button-send').on 'click', @onSendMessage
-    
+
   onRequest: (cmd, msg) =>
     switch cmd
       when "setSiteInfo" then @siteInfoChanged msg

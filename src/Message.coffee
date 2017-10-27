@@ -1,5 +1,6 @@
 import Avatar from "avatar-initials"
 import $ from "jquery"
+import * as C from "./Constant.coffee"
 
 AVATAR_CACHE = {}
 
@@ -9,8 +10,14 @@ class Message
     @elemAvatar = null
     @initial = null
 
+  getAvatarBorder: ->
+    C.MSG_AVATAR_BORDERS[@username.hashCode() % C.MSG_AVATAR_BORDERS.length]
+
   render: ->
     template = $('#message-template').html()
+
+    # Replace avatar border
+    template = template.replace '{{border}}', @getAvatarBorder()
 
     # Create element
     @elem = $(template)
