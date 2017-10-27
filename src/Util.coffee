@@ -6,3 +6,6 @@ String::hashCode = ->
     hash = ((hash << 5) - hash) + char
     hash = hash | 0
   return hash
+
+RegExp.quote = (str) ->
+  str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")

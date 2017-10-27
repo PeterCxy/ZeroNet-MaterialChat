@@ -133,6 +133,15 @@ body {
   margin-top: -1em;
 }
 
+.message span.mention {
+  font-weight: bold;
+  color: #C51162;
+}
+
+.message span.mention-other {
+  font-weight: bold;
+}
+
 @media screen and (min-width: 48em) {
   /* Remove the padding we set earlier */
   .header,
