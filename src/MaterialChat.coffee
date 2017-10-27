@@ -17,10 +17,7 @@ class MaterialChatImpl extends ZeroFrame
     $('container-main').focus()
     $('#button-send').on 'click', @onSendMessage
     $('#switch-user').click LoginDialog.selectUser
-    $('#message-input').keyup (ev) =>
-      code = if ev.keyCode? then ev.keyCode else ev.which
-      if code is 13
-        @onSendMessage ev
+    $('#message-form').submit @onSendMessage
 
   onRequest: (cmd, msg) =>
     switch cmd
