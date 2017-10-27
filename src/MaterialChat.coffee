@@ -25,6 +25,8 @@ class MaterialChatImpl extends ZeroFrame
     return if !info?
     #console.log info
     @site_info = info
+    $('title').text @site_info.content.title
+    $('#title').text @site_info.content.title
     if !@site_info.cert_user_id?
       LoginDialog.tryLogin()
     else
