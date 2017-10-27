@@ -1,6 +1,8 @@
 import MaterialChat from './MaterialChat.coffee'
 
 export PATH_USER_CONTENT = "data/users/content.json"
+export PATH_USER_INNER_DATA = "data/users/{{user}}/data.json"
+export PATH_USER_INNER_CONTENT = "data/users/{{user}}/content.json"
 
 export ID_PROVIDERS = [] # we will load it later from content.json
 
