@@ -89,6 +89,7 @@ body {
 .message .timestamp {
   font-size: 0.8em;
   color: rgb(100, 100, 100);
+  margin-top: -1em;
 }
 
 @media screen and (min-width: 48em) {
