@@ -1,0 +1,93 @@
+body {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.header {
+  padding-bottom: 1rem;
+  border-bottom: .05rem solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 3rem;
+}
+
+.header,
+.footer {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+@media (min-width: 48em) {
+  .container {
+    max-width: 46rem;
+  }
+}
+.container-narrow > hr {
+  margin: 2rem 0;
+}
+
+.invisible {
+  visibility: gone;
+}
+
+.container-main {
+  width: 100%;
+  display: block;
+  height: 70vh;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  overflow-y: scroll;
+}
+
+.container-messages {
+  width: 100%;
+  min-height: 70vh;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+   -ms-transform: rotate(180deg);
+       transform: rotate(180deg);
+}
+
+.container-input {
+  height: 5em;
+  vertical-align: bottom;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+}
+
+.message {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+   -ms-transform: rotate(180deg);
+       transform: rotate(180deg);
+}
+
+.message .media-body {
+  font-size: 1em;
+}
+
+.message h5 {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+@media screen and (min-width: 48em) {
+  /* Remove the padding we set earlier */
+  .header,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 2rem;
+  }
+}
