@@ -1,11 +1,12 @@
 import Avatar from "avatar-initials"
+import timeago from "timeago.js"
 import $ from "jquery"
 import * as C from "./Constant.coffee"
 
 AVATAR_CACHE = {}
 
 class Message
-  constructor: (@username, @message) ->
+  constructor: (@username, @message, @timestamp) ->
     @elem = null
     @elemAvatar = null
     @initial = null
@@ -29,6 +30,9 @@ class Message
     elemMsg = @elem.find '#message'
     elemMsg.text @message
     elemMsg.html elemMsg.html().replace /\n/g, '<br>'
+
+    # Render time
+    @elem.find('#timestamp').text timeago().format @timestamp
 
     # Render avatar
     @elemAvatar = @elem.find('#avatar')

@@ -24,7 +24,7 @@ class MessageListImpl
     messages = await MaterialChat.cmdp 'dbQuery', [C.SQL_GET_ALL_MESSAGES]
     @elem.html('') # Clear it
     messages.forEach (it) =>
-      @elem.append new Message(it.cert_user_id, it.body).render()
+      @elem.append new Message(it.cert_user_id, it.body, it.date_added).render()
     @container.animate { scrollTop: @container.height() }, 'slow'
 
 MessageList = new MessageListImpl

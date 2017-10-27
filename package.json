@@ -12,7 +12,8 @@
     "bootstrap": "^3.3.7",
     "bootstrap-material-design": "^4.0.0-beta.4",
     "jquery": "^3.2.1",
-    "popper.js": "^1.12.6"
+    "popper.js": "^1.12.6",
+    "timeago.js": "^3.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
