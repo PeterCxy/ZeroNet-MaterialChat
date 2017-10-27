@@ -20,11 +20,12 @@ class MaterialChatImpl extends ZeroFrame
 
   onRequest: (cmd, msg) =>
     switch cmd
-      when "setSiteInfo" then @siteInfoChanged msg.params
+      when "setSiteInfo" then @siteInfoChanged msg
       else super.onRequest cmd, msg
 
   siteInfoChanged: (info) =>
     return if !info?
+    #console.log info
     @site_info = info
     if !@site_info.cert_user_id?
       LoginDialog.tryLogin()
