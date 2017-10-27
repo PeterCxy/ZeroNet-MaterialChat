@@ -45,8 +45,9 @@ class MessageListImpl
     if @offset is -1
       @offset = @count - C.SQL_PAGE_LIMIT
     else
-      @offset = @offset - (@count - oldCount) + 1
-      @firstLimit = @firstLimit + (@count - oldCount)
+      if @count isnt oldCount
+        @offset = @offset - (@count - oldCount) + 1
+        @firstLimit = @firstLimit + (@count - oldCount)
     
     # TODO: Introduce OFFSET for scrolling up & down
     await @nextPage yes, @firstLimit
