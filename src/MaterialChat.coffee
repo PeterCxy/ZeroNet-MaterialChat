@@ -1,19 +1,33 @@
 import ZeroFrame from "./ZeroFrame.coffee"
 import Message from "./Message.coffee"
+import LoginDialog from "./LoginDialog.coffee"
+import * as C from './Constant.coffee'
 
-class MaterialChat extends ZeroFrame
+class MaterialChatImpl extends ZeroFrame
   init: ->
+    @site_info = null
     console.log "MaterialChat initialized."
 
-  onOpenWebsocket: () ->
+  onOpenWebsocket: () =>
+    C.initialize()
+    @cmd "siteInfo", {}, @siteInfoChanged # Intialize siteInfo
     #alert "Ready."
-    new Message "petercxy@zeroid.bit", "Test Message 1"
-      .render()
-    new Message "petercxy@zeroid.bit", "Test Message 2 \n Very \n Very \n Long \n Message"
-      .render()
-    new Message "petercxy@zeroid.bit", "Test Message 3 \n Very \n Very \n Very \n Very \n Very Very \n Long \n Message"
-      .render()
-    new Message "petercxy@zeroid.bit", "Test Message 4 \n Very \n Very \n Very \n Very \n Very Very \n Long \n Message"
-      .render()
+    #new Message "petercxy@zeroid.bit", "Test Message 1"
+    #  .render()
 
-export MC = new MaterialChat
+  onRequest: (cmd, msg) =>
+    switch cmd
+      when "setSiteInfo" then @siteInfoChanged msg.params
+      else super.onRequest cmd, msg
+
+  siteInfoChanged: (info) =>
+    @site_info = info
+    if !@site_info.cert_user_id?
+      LoginDialog.tryLogin()
+    else
+      LoginDialog.dismiss()
+      # TODO: Complete login
+
+MaterialChat = new MaterialChatImpl
+
+export default MaterialChat

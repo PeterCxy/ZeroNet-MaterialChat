@@ -71,10 +71,9 @@ class ZeroFrame
     @send {"cmd": cmd, "params": params}, cb
 
   cmdp: (cmd, params={}) ->
-    p = new Promise()
-    @send {"cmd": cmd, "params": params}, (res) ->
-      p.resolve(res)
-    return p
+    new Promise (resolve, reject) =>
+      @send {"cmd": cmd, "params": params}, (res) ->
+        resolve res
 
   send: (message, cb=null) ->
     message.wrapper_nonce = @wrapper_nonce
