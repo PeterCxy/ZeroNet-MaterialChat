@@ -24,6 +24,12 @@ body {
     max-width: 46rem;
   }
 }
+
+@media (min-height: 40em) {
+  body {
+    overflow-y: hidden;
+  }
+}
 .container-narrow > hr {
   margin: 2rem 0;
 }
