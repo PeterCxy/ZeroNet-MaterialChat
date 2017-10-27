@@ -16,6 +16,7 @@ class MaterialChatImpl extends ZeroFrame
     @cmd "siteInfo", {}, @siteInfoChanged # Intialize siteInfo
     $('container-main').focus()
     $('#button-send').on 'click', @onSendMessage
+    $('#switch-user').click LoginDialog.selectUser
 
   onRequest: (cmd, msg) =>
     switch cmd
@@ -33,7 +34,6 @@ class MaterialChatImpl extends ZeroFrame
     else
       LoginDialog.dismiss()
       $('#current-user').text "Current: " + @site_info.cert_user_id
-      $('#switch-user').click LoginDialog.selectUser
       MessageList.loadMessages()
       # TODO: Complete login
 
