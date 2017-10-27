@@ -16,7 +16,7 @@ module.exports = {
             loader: 'coffee-loader',
             options: {
               transpile: {
-                presets: [['env', { exclude: ["transform-es2015-classes"] }]]
+                presets: ['env']
               }
             }
           }

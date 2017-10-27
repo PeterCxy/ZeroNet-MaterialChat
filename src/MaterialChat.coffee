@@ -1,4 +1,4 @@
-import ZeroFrame from "./ZeroFrame"
+import ZeroFrame from "./ZeroFrame.coffee"
 import Message from "./Message.coffee"
 
 class MaterialChat extends ZeroFrame
