@@ -22,9 +22,10 @@ class MessageListImpl
 
   loadMessages: =>
     messages = await MaterialChat.cmdp 'dbQuery', [C.SQL_GET_ALL_MESSAGES]
+    # TODO: Introduce OFFSET for scrolling up & down
     @elem.html('') # Clear it
     messages.forEach (it) =>
-      @elem.append new Message(it.cert_user_id, it.body, it.date_added).render()
+      @elem.prepend new Message(it.cert_user_id, it.body, it.date_added).render()
     @container.animate { scrollTop: @elem.height() }, 'slow'
 
 MessageList = new MessageListImpl
