@@ -59,6 +59,14 @@ body {
        transform: rotate(180deg);
 }
 
+.container-messages .load-more-container {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+   -ms-transform: rotate(180deg);
+       transform: rotate(180deg);
+}
+
 .container-input input[type="text"] {
   min-height: 2.5em;
   line-height: 1em;
