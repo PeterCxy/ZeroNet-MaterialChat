@@ -36,7 +36,6 @@ class MaterialChatImpl extends ZeroFrame
       LoginDialog.dismiss()
       $('#current-user').text "Current: " + @site_info.cert_user_id
       MessageList.loadMessages()
-      # TODO: Complete login
 
   onSendMessage: (ev) ->
     ev.preventDefault()
@@ -45,7 +44,6 @@ class MaterialChatImpl extends ZeroFrame
     msgInput.val ''
     if message isnt ''
       await MessageList.sendMessage message
-    MessageList.loadMessages()
 
   getUserData: (required = no) =>
     dataPath = C.PATH_USER_INNER_DATA.replace '{{user}}', @site_info.auth_address

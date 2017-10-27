@@ -23,6 +23,7 @@ class MessageListImpl
       body: message
       date_added: Date.now()
     await MaterialChat.writeUserData data
+    @loadMessages()
     await MaterialChat.publishUserContent()
 
   nextPage: (clear = no, limit = C.SQL_PAGE_LIMIT) =>
