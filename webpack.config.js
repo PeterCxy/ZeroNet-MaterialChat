@@ -26,7 +26,7 @@ module.exports = {
         test: /\.css$/,
         loader: "style-loader!css-loader"
       },
-      { test: /\.(jpe?g|png|gif|svg|eot|woff|ttf|svg|woff2)$/, loader: "file-loader?name=[name].[ext]" }
+      { test: /\.(jpe?g|png|gif|svg|eot|woff|ttf|svg|woff2)$/, loader: "base64-inline-loader?name=[name].[ext]" }
     ]
   },
   plugins: [
