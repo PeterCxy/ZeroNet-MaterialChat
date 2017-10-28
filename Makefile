@@ -1,8 +1,12 @@
-.PHONY: build deploy
+.PHONY: debug debugDeploy prod
 
-build:
+debug:
 	rm -rf dist
-	node_modules/.bin/webpack
+	NODE_ENV=debug node_modules/.bin/webpack
 
-deploy: build
+prod:
+	rm -rf dist
+	NODE_ENV=production node_modules/.bin/webpack
+
+debugDeploy: debug
 	sh ./deploy.sh

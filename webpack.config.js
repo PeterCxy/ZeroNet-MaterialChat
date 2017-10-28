@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const isProd = (process.env.NODE_ENV === 'production')
 
 module.exports = {
   entry: './index.js',
@@ -15,6 +16,7 @@ module.exports = {
           {
             loader: 'coffee-loader',
             options: {
+              sourceMap: true,
               transpile: {
                 presets: ['env']
               }
@@ -32,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        loader: ['file-loader?name=[name].[ext]', './autoVer']
+        loader: ['file-loader?name=[name].[ext]', 'html-minify-loader', './autoVer']
       }
     ]
   },
@@ -45,6 +47,18 @@ module.exports = {
       // In case you imported plugins individually, you must also require them here:
       Util: "exports-loader?Util!bootstrap/js/dist/util",
       Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+        screw_ie8: true
+      }
     })
-  ]
+  ],
+  devtool: 'inline-source-map'
 };
+
+if (isProd) {
+  module.exports.devtool = ''
+}
