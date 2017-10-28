@@ -11,7 +11,6 @@ class MessageListImpl
     @offset = -1
     @loadMore = null
     @loadMoreTemplate = $('#message-load-more-template').html()
-    @firstLimit = C.SQL_PAGE_LIMIT
 
   sendMessage: (message) ->
     data = await MaterialChat.getUserData()
@@ -48,9 +47,8 @@ class MessageListImpl
     else
       if @count isnt oldCount
         @offset = @offset - (@count - oldCount) + 1
-        @firstLimit = @firstLimit + (@count - oldCount)
     
-    await @nextPage yes, @firstLimit
+    await @nextPage yes, Number.MAX_SAFE_INTEGER
     # TODO： Don't scroll if not at the bottom
     @container.animate { scrollTop: @elem.height() }, 'slow'
   
@@ -60,7 +58,6 @@ class MessageListImpl
     @offset = @offset - C.SQL_PAGE_LIMIT
     if @offset < 0
       @offset = 0
-    @firstLimit = @firstLimit + oldOffset - @offset
     @nextPage()
     
 MessageList = new MessageListImpl
