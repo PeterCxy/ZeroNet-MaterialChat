@@ -42,15 +42,21 @@ class MessageListImpl
     resCount = await MaterialChat.cmdp 'dbQuery', [C.SQL_GET_MESSAGE_COUNT]
     oldCount = @count
     @count = resCount[0]['COUNT(*)']
+    first = no
     if @offset is -1
       @offset = @count - C.SQL_PAGE_LIMIT
+      first = yes
     else
       if @count isnt oldCount
         @offset = @offset - (@count - oldCount) + 1
     
+    # If near the bottom, automatically scroll to bottom
+    scroll =
+      (@container[0].scrollHeight - @container.scrollTop()) < (1.1 * @container.outerHeight())
+    # Load new messages after calculating scrollTop
     await @nextPage yes, Number.MAX_SAFE_INTEGER
-    # TODO： Don't scroll if not at the bottom
-    @container.animate { scrollTop: @elem.height() }, 'slow'
+    if first or scroll
+      @container.animate { scrollTop: @elem.height() }, 'slow'
   
   onLoadMore: (ev) =>
     ev.preventDefault()
