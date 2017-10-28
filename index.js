@@ -1,4 +1,5 @@
 import 'babel-polyfill'
+import './static/index.html'
 import "./src/MaterialChat.coffee"
 import './src/style.css'
 import './node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css'
