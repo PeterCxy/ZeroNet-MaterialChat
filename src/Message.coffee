@@ -31,17 +31,7 @@ class Message
     # Render Message and keep new lines
     elemMsg = @elem.find '#message'
     elemMsg.text @message
-    html = elemMsg.html().replace /\n/g, '<br>'
-
-    # Highlight mentions
-    html = html.replace /(\S+)@(\S+)\.bit( |:|)/g, "<span class=\"mention-other\">$&</span>"
-    regex = new RegExp RegExp.quote(MaterialChat.site_info.cert_user_id), 'g'
-    html = html.replace regex, "<span class=\"mention\">#{MaterialChat.site_info.cert_user_id}</span>"
-
-    # Auto-linkify
-    html = linkifyHtml html
-
-    elemMsg.html html
+    elemMsg.html @renderMessageContent elemMsg.html()
 
     # Render time
     @elem.find('#timestamp').text timeago().format @timestamp
@@ -55,6 +45,15 @@ class Message
     @elem.find('#username').click @clickToReply
 
     return @elem
+
+  renderMessageContent: (html) ->
+    selfMentionRegex = new RegExp RegExp.quote(MaterialChat.site_info.cert_user_id), 'g'
+    html = html.replace /\n/g, '<br>'
+      # Highlight mentions
+      .replace /(\S+)@(\S+)\.bit( |:|)/g, "<span class=\"mention-other\">$&</span>"
+      .replace selfMentionRegex, "<span class=\"mention\">#{MaterialChat.site_info.cert_user_id}</span>"
+    # Auto-linkify
+    linkifyHtml html
 
   renderAvatar: ->
     if AVATAR_CACHE[@initial]?
