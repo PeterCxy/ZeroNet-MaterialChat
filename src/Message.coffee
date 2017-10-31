@@ -1,5 +1,6 @@
 import Avatar from "avatar-initials"
 import timeago from "timeago.js"
+import linkifyHtml from "linkifyjs/html"
 import $ from "jquery"
 import MaterialChat from "./MaterialChat.coffee"
 import * as C from "./Constant.coffee"
@@ -36,6 +37,10 @@ class Message
     html = html.replace /(\S+)@(\S+)\.bit( |:|)/g, "<span class=\"mention-other\">$1@$2.bit$3</span>"
     regex = new RegExp RegExp.quote(MaterialChat.site_info.cert_user_id), 'g'
     html = html.replace regex, "<span class=\"mention\">#{MaterialChat.site_info.cert_user_id}</span>"
+
+    # Auto-linkify
+    html = linkifyHtml html
+
     elemMsg.html html
 
     # Render time
