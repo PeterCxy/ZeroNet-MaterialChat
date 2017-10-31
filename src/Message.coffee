@@ -34,7 +34,7 @@ class Message
     html = elemMsg.html().replace /\n/g, '<br>'
 
     # Highlight mentions
-    html = html.replace /(\S+)@(\S+)\.bit( |:|)/g, "<span class=\"mention-other\">$1@$2.bit$3</span>"
+    html = html.replace /(\S+)@(\S+)\.bit( |:|)/g, "<span class=\"mention-other\">$&</span>"
     regex = new RegExp RegExp.quote(MaterialChat.site_info.cert_user_id), 'g'
     html = html.replace regex, "<span class=\"mention\">#{MaterialChat.site_info.cert_user_id}</span>"
 
