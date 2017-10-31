@@ -32,6 +32,7 @@ class Message
     elemMsg = @elem.find '#message'
     elemMsg.text @message
     elemMsg.html @renderMessageContent elemMsg.html()
+    @fixLinks elemMsg
 
     # Render time
     @elem.find('#timestamp').text timeago().format @timestamp
@@ -81,5 +82,13 @@ class Message
     if input.val().trim() is ''
       input.val @username + ': '
       input.focus()
+
+  fixLinks: (elem) ->
+    # Opening new window from iframe is highly restricted.
+    # Call the wrapper for this purpose.
+    # TODO: DO NOT apply this for links that are not target="_blank"
+    elem.find('a').click (ev) ->
+      ev.preventDefault()
+      MaterialChat.cmd 'wrapperOpenWindow', [$(@).attr('href'), '_blank']
 
 export default Message
