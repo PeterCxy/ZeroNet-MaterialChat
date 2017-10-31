@@ -52,8 +52,19 @@ class Message
       # Highlight mentions
       .replace /(\S+)@(\S+)\.bit( |:|)/g, "<span class=\"mention-other\">$&</span>"
       .replace selfMentionRegex, "<span class=\"mention\">#{MaterialChat.site_info.cert_user_id}</span>"
+
     # Auto-linkify
-    linkifyHtml html
+    linkifyHtml html,
+      format: (url, type) ->
+        if type is 'url'
+          url.replace 'http://127.0.0.1:43110/', '0net://' # ZeroNet links
+        else
+          url
+      formatHref: (href, type) ->
+        if type is 'url'
+          href.replace 'http://127.0.0.1:43110/', '/' # ZeroNet links
+        else
+          href
 
   renderAvatar: ->
     if AVATAR_CACHE[@initial]?
