@@ -16,8 +16,6 @@ class MessageListImpl
     data = await MaterialChat.getUserData()
     if !data?
       data = { message: [] } # Initialize
-    else
-      data = JSON.parse data
     data.message.push
       body: message
       date_added: Date.now()

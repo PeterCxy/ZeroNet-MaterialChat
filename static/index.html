@@ -50,6 +50,7 @@
               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex1">
                 <button class="dropdown-item" type="button" id="current-user" disabled>{{current_user}}</button>
                 <button class="dropdown-item" type="button" id="switch-user">Switch User</button>
+                <button class="dropdown-item" type="button" id="set-avatar">Avatar Settings</button>
               </div>
             </div>
           </div>
@@ -83,6 +84,31 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" id="choose-user">Choose User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modal-avatar-settings" aria-hidden="true" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Choose Avatar</h5>
+        </div>
+        <div class="modal-body">
+          <input id="avatar-upload" type=file accept="image/*" name="avatar_uploads[]"/>
+          <div id="avatar-preview-container" class="invisible">
+            <img src='' id="avatar-cropper"/>
+            <br/>
+            <h5>Preview</h5>
+            <div id="avatar-result-container" class="avatar rounded-circle border border-secondary">
+              <img src='' id="avatar-result"/>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="avatar-clear">Remove Avatar</button>  
+          <button type="button" class="btn btn-secondary" id="avatar-cancel">Cancel</button>
+          <button type="button" class="btn btn-primary disabled" id="avatar-ok">OK</button>
         </div>
       </div>
     </div>

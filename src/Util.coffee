@@ -9,3 +9,10 @@ String::hashCode = ->
 
 RegExp.quote = (str) ->
   str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")
+
+export readDataURL = (file) ->
+  new Promise (resolve, reject) ->
+    reader = new FileReader()
+    reader.onload = (e) ->
+      resolve e.target.result
+    reader.readAsDataURL file

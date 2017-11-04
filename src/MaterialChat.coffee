@@ -3,6 +3,7 @@ import ZeroFrame from "./ZeroFrame.coffee"
 import Message from "./Message.coffee"
 import MessageList from "./MessageList.coffee"
 import LoginDialog from "./LoginDialog.coffee"
+import AvatarChooser from "./AvatarChooser.coffee"
 import * as C from './Constant.coffee'
 import $ from 'jquery'
 
@@ -17,6 +18,7 @@ class MaterialChatImpl extends ZeroFrame
     $('container-main').focus()
     $('#button-send').on 'click', @onSendMessage
     $('#switch-user').click LoginDialog.selectUser
+    $('#set-avatar').click AvatarChooser.show
     $('#message-form').submit @onSendMessage
 
   onRequest: (cmd, msg) =>
@@ -45,19 +47,35 @@ class MaterialChatImpl extends ZeroFrame
     if message isnt ''
       await MessageList.sendMessage message
 
-  getUserData: (required = no) =>
-    dataPath = C.PATH_USER_INNER_DATA.replace '{{user}}', @site_info.auth_address
+  # Replace the placeholder '{{user}}' with the actual address
+  getUserFilePath: (file) => file.replace '{{user}}', @site_info.auth_address
+
+  # Get content of file ({{user}} will be replaced by user's address)
+  getUserFile: (file, required = no) =>
     @cmdp 'fileGet',
-      inner_path: dataPath
+      inner_path: @getUserFilePath file
       required: required
 
-  writeUserData: (obj) =>
-    dataPath = C.PATH_USER_INNER_DATA.replace '{{user}}', @site_info.auth_address
-    json_raw = unescape(encodeURIComponent(JSON.stringify(obj, undefined, '\t')))
-    res = await @cmdp 'fileWrite', [dataPath, btoa(json_raw)]
+  # Write base64-encoded data to file ({{user}} will be replaced by user's address)
+  writeUserFile: (file, data) =>
+    res = await @cmdp 'fileWrite', [@getUserFilePath(file), data]
     if res isnt 'ok'
       await @cmdp 'wrapperNotification', ["error", "File write error #{res.error}"]
     return res
+
+  getUserFileJSON: (file, required = no) =>
+    try
+      return JSON.parse await @getUserFile(file, required)
+    catch e
+      return null
+
+  writeUserFileJSON: (file, obj) =>
+    json_raw = unescape encodeURIComponent JSON.stringify(obj, undefined, '\t')
+    @writeUserFile file, btoa(json_raw)
+
+  # Shorthands for data.json
+  getUserData: (required = no) => @getUserFileJSON C.PATH_USER_INNER_DATA, required
+  writeUserData: (obj) => @writeUserFileJSON C.PATH_USER_INNER_DATA, obj
 
   publishUserContent: =>
     contentPath = C.PATH_USER_INNER_CONTENT.replace '{{user}}', @site_info.auth_address

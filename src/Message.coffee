@@ -68,6 +68,7 @@ class Message
           href
 
   renderAvatar: ->
+    # TODO: Load custom avatar if available
     if AVATAR_CACHE[@initial]?
       @elemAvatar.attr 'src', AVATAR_CACHE[@initial]
     else

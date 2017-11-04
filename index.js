@@ -7,4 +7,6 @@ import 'webpack-material-design-icons'
 
 import 'bootstrap'
 import 'bootstrap-material-design'
+
+import 'cropper/dist/cropper.min.css'
 //import './static/style.scss'
