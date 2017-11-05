@@ -78,7 +78,7 @@ class MaterialChatImpl extends ZeroFrame
   writeUserData: (obj) => @writeUserFileJSON C.PATH_USER_INNER_DATA, obj
 
   publishUserContent: =>
-    contentPath = C.PATH_USER_INNER_CONTENT.replace '{{user}}', @site_info.auth_address
+    contentPath = @getUserFilePath C.PATH_USER_INNER_CONTENT
     await @cmdp 'siteSign', inner_path: contentPath
     await @cmdp 'sitePublish',
       inner_path: contentPath
