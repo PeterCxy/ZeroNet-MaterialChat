@@ -48,7 +48,8 @@ class MaterialChatImpl extends ZeroFrame
       await MessageList.sendMessage message
 
   # Replace the placeholder '{{user}}' with the actual address
-  getUserFilePath: (file) => file.replace '{{user}}', @site_info.auth_address
+  replaceUserAuth: (str) => str.replace '{{user}}', @site_info.auth_address
+  getUserFilePath: (file) => @replaceUserAuth file
 
   # Get content of file ({{user}} will be replaced by user's address)
   getUserFile: (file, required = no) =>
@@ -76,6 +77,10 @@ class MaterialChatImpl extends ZeroFrame
   # Shorthands for data.json
   getUserData: (required = no) => @getUserFileJSON C.PATH_USER_INNER_DATA, required
   writeUserData: (obj) => @writeUserFileJSON C.PATH_USER_INNER_DATA, obj
+
+  # Shorthands for user's content.json
+  getUserContent: (required = no) => @getUserFileJSON C.PATH_USER_INNER_CONTENT, required
+  writeUserContent: (obj) => @writeUserFileJSON C.PATH_USER_INNER_CONTENT, obj
 
   publishUserContent: =>
     contentPath = @getUserFilePath C.PATH_USER_INNER_CONTENT

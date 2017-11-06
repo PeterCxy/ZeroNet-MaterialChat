@@ -4,7 +4,8 @@
   "version": 2,
   "maps": {
       "users/.+/data.json": {
-          "to_table": [ "message" ]
+          "to_table": [ "message" ],
+          "to_keyvalue": [ "avatar", "avatar" ]
       },
       "users/.+/content.json": {
           "to_json_table": [ "cert_user_id" ],
@@ -30,6 +31,16 @@
           ],
           "indexes": ["CREATE UNIQUE INDEX message_key ON message(json_id, date_added)"],
           "schema_changed": 10
+      },
+      "keyvalue": {
+          "cols": [
+              ["keyvalue_id", "INTEGER PRIMARY KEY AUTOINCREMENT"],
+              ["key", "TEXT"],
+              ["value", "TEXT"],
+              ["json_id", "INTEGER"]
+          ],
+          "indexes": ["CREATE UNIQUE INDEX key_id ON keyvalue(json_id, key)"],
+          "schema_changed": 20171106
       }
   }
 }

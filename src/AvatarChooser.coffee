@@ -1,5 +1,6 @@
 import $ from "jquery"
 import "cropper"
+import AvatarManager from "./AvatarManager.coffee"
 import { readDataURL } from "./Util.coffee"
 
 class AvatarChooserImpl
@@ -65,7 +66,8 @@ class AvatarChooserImpl
     # Get base64 data based on dataURL
     dataURL = @avatarCropper.cropper('getCroppedCanvas').toDataURL 'image/jpeg', 0.9
     imgBase64 = dataURL.replace 'data:image/jpeg;base64,', ''
-    console.log imgBase64 # TODO: Finish setting avatar
+    await AvatarManager.uploadAvatar imgBase64
+    console.log await AvatarManager.getMyAvatarFile()
 
 AvatarChooser = new AvatarChooserImpl
 export default AvatarChooser

@@ -15,7 +15,10 @@ class MessageListImpl
   sendMessage: (message) ->
     data = await MaterialChat.getUserData()
     if !data?
-      data = { message: [] } # Initialize
+      data = {} # Initialize
+    if !data.message?
+      data.message = []
+      
     data.message.push
       body: message
       date_added: Date.now()

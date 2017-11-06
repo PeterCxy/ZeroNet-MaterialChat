@@ -16,3 +16,10 @@ export readDataURL = (file) ->
     reader.onload = (e) ->
       resolve e.target.result
     reader.readAsDataURL file
+
+STR_DICTIONARY = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+export randomStr = (len) ->
+  [1..len]
+    .map ->
+      STR_DICTIONARY.charAt Math.floor(Math.random() * STR_DICTIONARY.length)
+    .join ''
