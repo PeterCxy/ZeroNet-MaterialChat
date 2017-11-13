@@ -15,7 +15,8 @@ export SQL_GET_ALL_MESSAGES =
   "(SELECT value as avatar, json_id FROM keyvalue WHERE key = 'avatar') USING (json_id) " +
   "ORDER BY date_added ASC"
 export SQL_GET_UPLOADED_AVATAR =
-  "SELECT value FROM keyvalue LEFT JOIN json USING (json_id) WHERE directory=\"users/{{user}}\""
+  "SELECT value FROM keyvalue LEFT JOIN json USING (json_id) " +
+  "WHERE key = 'avatar' AND directory=\"users/{{user}}\""
 
 export MSG_AVATAR_BORDERS = [
   'primary',
