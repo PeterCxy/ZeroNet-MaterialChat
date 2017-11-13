@@ -23,8 +23,8 @@ class OptionalFileManagerImpl
     # Please sign & publish when needed
     return fileName
 
-  deleteFile: (fileName) =>
-    # TODO: Add MaterialChat.deleteUserFile()
+  deleteFile: (fileName) ->
+    MaterialChat.deleteUserFile C.PATH_USER_UPLOADED_CONTENT + fileName
 
 OptionalFileManager = new OptionalFileManagerImpl
 export default OptionalFileManager

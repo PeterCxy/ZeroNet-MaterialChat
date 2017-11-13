@@ -14,6 +14,8 @@ class AvatarChooserImpl
     @avatarUpload.on 'change', @handleUpload
     @buttonOkay = $('#avatar-ok')
     @buttonOkay.click @handleSetAvatar
+    @buttonClear = $('#avatar-clear')
+    @buttonClear.click @handleClearAvatar
     $('#avatar-cancel').click => @dialog.modal 'hide'
 
   show: =>
@@ -68,6 +70,16 @@ class AvatarChooserImpl
     imgBase64 = dataURL.replace 'data:image/jpeg;base64,', ''
     await AvatarManager.uploadAvatar imgBase64
     console.log await AvatarManager.getMyAvatarFile()
+    
+    # Close this dialog
+    @dialog.modal 'hide'
+
+  handleClearAvatar: (ev) =>
+    ev.preventDefault()
+    await AvatarManager.removeAvatar()
+
+    # Close this dialog
+    @dialog.modal 'hide'
 
 AvatarChooser = new AvatarChooserImpl
 export default AvatarChooser

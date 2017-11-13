@@ -64,6 +64,12 @@ class MaterialChatImpl extends ZeroFrame
       await @cmdp 'wrapperNotification', ["error", "File write error #{res.error}"]
     return res
 
+  deleteUserFile: (file) =>
+    res = await @cmdp 'fileDelete', [@getUserFilePath(file)]
+    if res isnt 'ok'
+      await @cmdp 'wrapperNotification', ["error", "File delete error #{res.error}"]
+    return res
+
   getUserFileJSON: (file, required = no) =>
     try
       return JSON.parse await @getUserFile(file, required)

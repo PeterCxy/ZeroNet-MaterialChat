@@ -24,10 +24,16 @@ class AvatarManagerImpl
     avatar = await @getMyAvatarFile()
     return if !avatar? or avatar is ''
     await OptionalFileManager.deleteFile avatar
-    # TODO: Remove entry in user data
+    
+    # Remove registry in user data
+    data = await MaterialChat.getUserData()
+    if data?
+      data.avatar = ''
+      await MaterialChat.writeUserData data
+    await MaterialChat.publishUserContent()
 
   getAvatarFile: (address) ->
-    result = MaterialChat.cmdp 'dbQuery', [C.SQL_GET_UPLOADED_AVATAR.replace '{{user}}', address]
+    result = await MaterialChat.cmdp 'dbQuery', [C.SQL_GET_UPLOADED_AVATAR.replace('{{user}}', address)]
     if result.length > 0
       return result[0].value
     else
