@@ -8,7 +8,7 @@ import * as C from "./Constant.coffee"
 AVATAR_CACHE = {}
 
 class Message
-  constructor: (@username, @message, @timestamp) ->
+  constructor: (@username, @message, @avatar, @timestamp) ->
     @elem = null
     @elemAvatar = null
     @initial = null
@@ -69,7 +69,10 @@ class Message
 
   renderAvatar: ->
     # TODO: Load custom avatar if available
-    if AVATAR_CACHE[@initial]?
+    if @avatar? and @avatar isnt ''
+      path = MaterialChat.getUserFilePath C.PATH_USER_UPLOADED_CONTENT + @avatar
+      @elemAvatar.attr 'src', path
+    else if AVATAR_CACHE[@initial]?
       @elemAvatar.attr 'src', AVATAR_CACHE[@initial]
     else
       new Avatar @elemAvatar[0],

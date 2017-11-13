@@ -33,7 +33,7 @@ class MessageListImpl
     messages = messages.reverse()
     @elem.html('') if clear
     messages.forEach (it) =>
-      @elem.append new Message(it.cert_user_id, it.body, it.date_added).render()
+      @elem.append new Message(it.cert_user_id, it.body, it.avatar, it.date_added).render()
     if @offset > 0
       @loadMore = $(@loadMoreTemplate)
       @loadMore.find('#load-more').click @onLoadMore

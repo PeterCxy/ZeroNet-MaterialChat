@@ -11,7 +11,9 @@ export ID_PROVIDERS = [] # we will load it later from content.json
 export SQL_PAGE_LIMIT = 15
 export SQL_GET_MESSAGE_COUNT = "SELECT COUNT(*) FROM message"
 export SQL_GET_ALL_MESSAGES =
-  "SELECT * FROM message LEFT JOIN json USING (json_id) ORDER BY date_added ASC"
+  "SELECT * FROM message LEFT JOIN json USING (json_id) LEFT JOIN " +
+  "(SELECT value as avatar, json_id FROM keyvalue WHERE key = 'avatar') USING (json_id) " +
+  "ORDER BY date_added ASC"
 export SQL_GET_UPLOADED_AVATAR =
   "SELECT value FROM keyvalue LEFT JOIN json USING (json_id) WHERE directory=\"users/{{user}}\""
 
